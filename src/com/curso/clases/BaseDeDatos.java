@@ -64,6 +64,6 @@ public class BaseDeDatos {
 
         return resultado;
 
-        //Aqui un comectary
+        //Aqui un comectarios
     }
 }
