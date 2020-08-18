@@ -47,6 +47,8 @@ public class BaseDeDatos {
 
         }
 
+
+
        return resultado;
     }
 
@@ -55,7 +57,7 @@ public class BaseDeDatos {
         List<Municipio> resultado = new ArrayList<Municipio>();
 
         String sql = "SELECT M.* FROM municipio M , provincia P where M.provincia = P.código AND P.autonomía = ?";
-        PreparedStatement ps = Main.bbdd.Conexión.prepareStatement(sql);
+        PreparedStatement ps = Main.bbdd.Conexión.prepareStatement(sql) ;
         ps.setString(1, códigoAutonomia);
         ResultSet rs = ps.executeQuery();
 
