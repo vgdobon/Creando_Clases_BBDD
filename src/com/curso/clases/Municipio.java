@@ -34,7 +34,7 @@ public class Municipio {
         this.código=códigoMunicipio;
 
         String sql = "SELECT * FROM municipio WHERE código = ? AND provincia = ?";
-        PreparedStatement ps = Main.Conexión.prepareStatement(sql);
+        PreparedStatement ps = Main.bbdd.Conexión.prepareStatement(sql);
         ps.setString(1,this.código);
         ps.setString(2,this.provincia);
         ResultSet rs = ps.executeQuery();

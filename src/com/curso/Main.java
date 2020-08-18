@@ -1,43 +1,50 @@
 package com.curso;
 
+import com.curso.clases.BaseDeDatos;
 import com.curso.clases.Municipio;
 import com.curso.clases.Provincia;
+import com.curso.clases.Autonomía;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Main
 {
-    public static Connection Conexión = null;
-
-    //Conectar a la bbdd
-    public static void conectarBD() throws SQLException , ClassNotFoundException {
-
-            Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://192.168.56.2/geografia";
-            String usuario = "censo";
-            String clave = "620312786";
-            Conexión = DriverManager.getConnection(url, usuario, clave);
-
-
-    }
+    public static BaseDeDatos bbdd = new BaseDeDatos();
     public static void main(String[] args)
     {
         try{
-            conectarBD();
-            Municipio m = new Municipio("99", "297");
-            Provincia p = new Provincia("05");
-            if(m.getVálido()) {
-                System.out.println(m.aCadena());
-            }else{
-                System.out.println("No existe el municipio indicado");
+            bbdd.conectarBD();
+
+            Provincia p = new Provincia("50");
+            Autonomía a = new Autonomía("02","Aragón");
+
+            List<Municipio> municipios = p.municipios();//
+
+            if(municipios==null){
+                System.out.println("La provincia no existe");
+            } else {
+                //TODO: aqui mostraria la lista de municipios
             }
-            if(p.getVálido()) {
-                System.out.println(p.aCadena());
-            }else{
-                System.out.println("No existe la provincia indicada");
-            }
+
+
+
+//
+//
+//            Municipio m = new Municipio("99", "297");
+//            Provincia p = new Provincia("05");
+//            if(m.getVálido()) {
+//                System.out.println(m.aCadena());
+//            }else{
+//                System.out.println("No existe el municipio indicado");
+//            }
+//            if(p.getVálido()) {
+//                System.out.println(p.aCadena());
+//            }else{
+//                System.out.println("No existe la provincia indicada");
+//            }
 
         } catch (SQLException e) {
             System.out.println("Error SQL: " + e.toString());

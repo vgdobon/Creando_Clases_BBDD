@@ -26,7 +26,7 @@ public class Provincia {
 
         String sql = "SELECT * FROM provincia" +
                 " WHERE código = ?";
-        PreparedStatement ps = Main.Conexión.prepareStatement(sql);
+        PreparedStatement ps = Main.bbdd.Conexión.prepareStatement(sql);
         ps.setString(1,this.código);
         ResultSet rs = ps.executeQuery();
         if(rs.next()){
@@ -49,7 +49,7 @@ public class Provincia {
         int resultado = -1;
 
         try {
-            Statement s = Main.Conexión.createStatement();
+            Statement s = Main.bbdd.Conexión.createStatement();
             String sql = "SELECT sum(población) AS total FROM municipio" +
                     " WHERE provincia = '" + this.código + "'";
             ResultSet rs = s.executeQuery(sql);
@@ -69,7 +69,7 @@ public class Provincia {
         List<Municipio> resultado = new ArrayList<Municipio>();
 
         try {
-            Statement s = Main.Conexión.createStatement();
+            Statement s = Main.bbdd.Conexión.createStatement();
             String sql = "SELECT * FROM municipio" +
                     " WHERE provincia = '" + this.código + "'" +
                     " ORDER BY nombre";
@@ -87,5 +87,8 @@ public class Provincia {
 
 
         return resultado;
+    }
+    public List<Municipio> municipios() throws SQLException {
+        return Main.bbdd.municipiosProvincia(this.código);
     }
 }

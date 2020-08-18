@@ -34,7 +34,7 @@ public class Autonomía
             String sql = "SELECT * FROM municipio M," +
                     " provincia P WHERE M.provincia = P.código" +
                     " AND P.autonomía = ? ORDER BY M.nombre";
-            PreparedStatement ps = Main.Conexión.prepareStatement(sql);
+            PreparedStatement ps = Main.bbdd.Conexión.prepareStatement(sql);
             ps.setString(1, this.código);
             ResultSet rs = ps.executeQuery();
 
@@ -56,7 +56,7 @@ public class Autonomía
         List<Municipio> resultado = new ArrayList<Municipio>();
 
         try {
-            Statement s = Main.Conexión.createStatement();
+            Statement s = Main.bbdd.Conexión.createStatement();
             String sql = "SELECT * FROM municipio M," +
                     " provincia P WHERE M.provincia = P.código" +
                     " AND P.autonomía = '" + this.código + "'";
